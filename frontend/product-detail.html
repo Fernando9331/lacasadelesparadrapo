@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalle del producto - La Casa del Esparadrapo. Ficha técnica, registro sanitario ARCSA y cotización directa de insumos médicos y materia prima.">
+  <title>Detalle de Producto | La Casa del Esparadrapo</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Premium Floating Header (Shared layout) -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <a href="index.html" class="logo-area">
+        <div class="logo-icon">
+          <i class="ri-heart-pulse-fill"></i>
+        </div>
+        <div class="logo-text">
+          <h1>La Casa del <span>Esparadrapo</span></h1>
+          <p>Laboratorio & Distribuidora</p>
+        </div>
+      </a>
+
+      <!-- Search Bar (Redirects back to index.html with query) -->
+      <div class="search-wrapper">
+        <i class="ri-search-line search-icon"></i>
+        <input type="text" id="catalogSearch" placeholder="Buscar en el catálogo..." aria-label="Buscar productos">
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <a href="index.html#agencies" class="nav-action-btn branch-btn" title="Nuestras Sucursales">
+          <i class="ri-map-pin-2-line"></i>
+          <span class="btn-lbl">Agencias</span>
+        </a>
+        <button class="nav-action-btn cart-toggle-btn" id="openCartBtn" title="Ver Carrito de Compras">
+          <div class="cart-icon-wrapper">
+            <i class="ri-shopping-cart-2-line"></i>
+            <span class="cart-badge" id="cartCountBadge">0</span>
+          </div>
+          <span class="btn-lbl">Mi Carrito</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs and Main Detail Container -->
+  <main class="content-wrapper">
+    
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ul>
+        <li><a href="index.html"><i class="ri-home-4-line"></i> Inicio</a></li>
+        <li><i class="ri-arrow-right-s-line separator"></i></li>
+        <li><a href="index.html#catalogo" id="breadcrumbCategory">Categoría</a></li>
+        <li><i class="ri-arrow-right-s-line separator"></i></li>
+        <li class="active" id="breadcrumbCurrent">Producto</li>
+      </ul>
+    </nav>
+
+    <!-- Detailed Product Layout Grid -->
+    <section class="pdp-container">
+      
+      <!-- Left Column: Gallery Visualizer -->
+      <div class="pdp-gallery-column">
+        <div class="main-image-viewer" id="pdpMainViewer">
+          <!-- Main Icon/SVG will load here -->
+          <i class="ri-image-line placeholder-icon"></i>
+        </div>
+        
+        <!-- Thumbnail selections (Freedom of photos) -->
+        <div class="thumbnails-row" id="pdpThumbnailsRow">
+          <!-- JS will load dynamic variants -->
+        </div>
+      </div>
+
+      <!-- Right Column: Product Content & Actions -->
+      <div class="pdp-info-column">
+        <div class="pdp-header">
+          <span class="product-badge" id="pdpCategoryBadge">Categoría</span>
+          <h2 class="pdp-title" id="pdpTitle">Cargando Producto...</h2>
+          <div class="pdp-trust-bar">
+            <span class="sanitary-badge"><i class="ri-shield-check-fill"></i> Registro Sanitario ARCSA Vigente</span>
+            <span class="stock-status"><span class="status-dot"></span> Stock Disponible</span>
+          </div>
+        </div>
+
+        <div class="pdp-price-section">
+          <span class="price-lbl">Precio de Distribución</span>
+          <div class="pdp-price" id="pdpPrice">$0.00</div>
+          <span class="pdp-iva-hint">Precios no incluyen I.V.A. (15%) al checkout.</span>
+        </div>
+
+        <p class="pdp-description" id="pdpDescription">
+          Descripción técnica detallada del producto.
+        </p>
+
+        <!-- PDP Actions: Quantity selectors & Cart Buttons -->
+        <div class="pdp-actions-panel">
+          <div class="qty-selector-wrapper">
+            <span class="qty-lbl">Cantidad</span>
+            <div class="qty-selector-ctrl">
+              <button class="qty-btn" id="pdpQtyDec" aria-label="Reducir cantidad"><i class="ri-subtract-line"></i></button>
+              <input type="number" id="pdpQtyInput" min="1" value="1" aria-label="Cantidad seleccionada">
+              <button class="qty-btn" id="pdpQtyInc" aria-label="Aumentar cantidad"><i class="ri-add-line"></i></button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary pdp-add-cart-btn" id="pdpAddCartBtn">
+            <i class="ri-shopping-cart-2-line"></i> Agregar al Carrito
+          </button>
+        </div>
+
+        <!-- WhatsApp Inquiries shortcut -->
+        <a href="#" id="pdpWaInquiryBtn" target="_blank" class="pdp-whatsapp-btn">
+          <i class="ri-whatsapp-fill"></i> ¿Tienes preguntas sobre este producto? Escríbenos
+        </a>
+
+        <!-- Specs Sheet Accordion/Card -->
+        <div class="pdp-specs-card">
+          <div class="specs-header">
+            <i class="ri-article-line"></i>
+            <h3>Ficha Técnica y Propiedades</h3>
+          </div>
+          <table class="specs-table">
+            <tbody>
+              <tr>
+                <td>Presentación comercial</td>
+                <td id="specPresentation">-</td>
+              </tr>
+              <tr>
+                <td>Código de Registro Sanitario</td>
+                <td id="specSanitaryCode">-</td>
+              </tr>
+              <tr>
+                <td>Composición base</td>
+                <td id="specComposition">-</td>
+              </tr>
+              <tr>
+                <td>Usos recomendados</td>
+                <td id="specUsage">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </section>
+
+  </main>
+
+  <!-- Cart Sidebar (Drawer layout shared) -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar-header">
+      <div class="cart-header-title">
+        <i class="ri-shopping-bag-line"></i>
+        <h3>Tu Carrito</h3>
+        <span class="cart-items-count-badge" id="cartItemsCount">0</span>
+      </div>
+      <button class="close-cart-btn" id="closeCartBtn" aria-label="Cerrar Carrito"><i class="ri-close-line"></i></button>
+    </div>
+
+    <!-- Custom Item Form (Freedom to add items not in catalog) -->
+    <div class="custom-product-form-container">
+      <h4 class="custom-form-title"><i class="ri-edit-box-line"></i> ¿Falta algún producto? Agrégalo aquí:</h4>
+      <form id="customProductForm" class="custom-product-form">
+        <input type="text" id="customItemName" placeholder="Nombre de insumo, materia prima..." required aria-label="Nombre del producto personalizado">
+        <div class="custom-form-row">
+          <input type="number" id="customItemQty" min="1" value="1" required aria-label="Cantidad" title="Cantidad">
+          <button type="submit" class="btn btn-primary btn-sm custom-add-btn">
+            <i class="ri-add-line"></i> Agregar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Empty state -->
+    <div class="cart-empty-state" id="cartEmptyState">
+      <i class="ri-shopping-cart-2-fill"></i>
+      <h4>¡Tu carrito está vacío!</h4>
+      <p>Explora nuestras categorías y agrega productos de insumos y materia prima.</p>
+      <button class="btn btn-primary" id="startShoppingBtn">Comenzar a Comprar</button>
+    </div>
+
+    <!-- Cart items lists -->
+    <div class="cart-items-container" id="cartItemsContainer" style="display: none;">
+      <!-- JS dynamic loading -->
+    </div>
+
+    <!-- Cart Footer & Checkout Form -->
+    <div class="cart-sidebar-footer" id="cartSidebarFooter" style="display: none;">
+      <div class="cart-totals">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="totals-row">
+          <span>I.V.A. (15%)</span>
+          <span id="cartTax">$0.00</span>
+        </div>
+        <div class="totals-row total-highlight">
+          <span>Total de Compra</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout fields -->
+      <div class="checkout-form">
+        <button class="btn btn-success btn-block checkout-submit-btn" id="checkoutBtn">
+          <i class="ri-secure-payment-line"></i> Finalizar Compra
+        </button>
+        <span class="checkout-hint">Será redirigido para ingresar su método de pago y dirección de despacho (con recargo de envío).</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Interactive Floating Chatbot widget -->
+  <div class="chatbot-widget" id="chatbotWidget">
+    <button class="chatbot-toggle" id="chatbotToggle" title="Chatear con un asesor virtual">
+      <div class="bot-icon">
+        <i class="ri-customer-service-2-fill"></i>
+      </div>
+      <div class="bot-notification-pulse"></div>
+      <span class="bot-tooltip">¿Dudas? Chatea con nosotros</span>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chat-header">
+        <div class="chat-bot-profile">
+          <div class="bot-avatar">
+            <i class="ri-robot-fill"></i>
+          </div>
+          <div>
+            <h4>Asistente Virtual</h4>
+            <p><span class="online-indicator"></span> En línea para ayudarte</p>
+          </div>
+        </div>
+        <button class="chat-close" id="chatbotClose"><i class="ri-close-line"></i></button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot-msg">
+          <p>¡Hola! 👋 Bienvenido a **La Casa del Esparadrapo**. Con más de 29 años de experiencia, estamos listos para atenderte. ¿Cómo te puedo ayudar hoy?</p>
+        </div>
+      </div>
+
+      <!-- Quick choices -->
+      <div class="chat-quick-replies" id="chatQuickReplies">
+        <button class="quick-reply-btn" data-reply="sucursales">📍 ¿Cuáles son sus sucursales?</button>
+        <button class="quick-reply-btn" data-reply="pedido">🛒 ¿Cómo realizo mi pedido?</button>
+        <button class="quick-reply-btn" data-reply="registro">🛡️ ¿Tienen registro sanitario?</button>
+        <button class="quick-reply-btn" data-reply="contacto">📞 Hablar con un asesor real</button>
+      </div>
+
+      <form class="chat-input-area" id="chatInputArea">
+        <input type="text" id="chatUserInput" placeholder="Escribe tu mensaje..." aria-label="Escribe tu mensaje para el asistente">
+        <button type="submit" class="chat-send-btn" aria-label="Enviar"><i class="ri-send-plane-2-fill"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-area light">
+          <div class="logo-icon">
+            <i class="ri-heart-pulse-fill"></i>
+          </div>
+          <div class="logo-text">
+            <h3>La Casa del <span>Esparadrapo</span></h3>
+            <p>Trayectoria & Confianza Médica</p>
+          </div>
+        </a>
+        <p class="brand-desc">Líderes en fabricación, comercialización y distribución de insumos médicos de primera y materia prima química en el Ecuador desde hace más de 29 años.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          <a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="index.html#catalogo">Catálogo Completo</a></li>
+          <li><a href="index.html#agencies">Sucursales / Agencias</a></li>
+          <li><a href="#" id="footerCartLink">Ver Carrito</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-categories">
+        <h4>Especialidades</h4>
+        <ul>
+          <li><a href="index.html#catalogo" class="footer-cat-link" data-cat="insumos-medicos">Insumos Médicos</a></li>
+          <li><a href="index.html#catalogo" class="footer-cat-link" data-cat="materia-prima">Materia Prima</a></li>
+          <li><a href="index.html#catalogo" class="footer-cat-link" data-cat="hogar-limpieza">Hogar & Limpieza</a></li>
+          <li><a href="index.html#catalogo" class="footer-cat-link" data-cat="cuidado-personal">Cuidado Personal</a></li>
+          <li><a href="index.html#catalogo" class="footer-cat-link" data-cat="envases">Envases y Empaques</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 La Casa del Esparadrapo. Todos los derechos reservados. Rediseño Web Premium presentado por <strong>Arkan Weaver</strong>.</p>
+    </div>
+  </footer>
+
+  <!-- Add-to-Cart Toast Notification -->
+  <div class="cart-toast" id="cartToast">
+    <div class="cart-toast-inner">
+      <div class="cart-toast-icon">
+        <i class="ri-checkbox-circle-fill"></i>
+      </div>
+      <div class="cart-toast-text">
+        <strong id="toastProductName">Producto</strong>
+        <span>se agregó al carrito correctamente.</span>
+      </div>
+      <div class="cart-toast-actions">
+        <button class="btn btn-outline btn-sm" id="toastContinueBtn">
+          <i class="ri-arrow-left-line"></i> Seguir Comprando
+        </button>
+        <button class="btn btn-success btn-sm" id="toastCheckoutBtn">
+          <i class="ri-shopping-cart-2-line"></i> Finalizar Compra
+        </button>
+      </div>
+      <button class="cart-toast-close" id="toastCloseBtn"><i class="ri-close-line"></i></button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./product-detail.js"></script>
+</body>
+</html>

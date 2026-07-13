@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Casa del Esparadrapo: E-commerce especializado en insumos médicos, materia prima, cuidado personal, productos para el hogar y envases con registro sanitario y más de 29 años de trayectoria.">
+  <title>La Casa del Esparadrapo | Rediseño E-commerce Premium</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Remix Icons (for premium vector icons) -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Premium Floating Header / Navigation -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <a href="#" class="logo-area">
+        <div class="logo-icon">
+          <i class="ri-heart-pulse-fill"></i>
+        </div>
+        <div class="logo-text">
+          <h1>La Casa del <span>Esparadrapo</span></h1>
+          <p>Laboratorio & Distribuidora</p>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <i class="ri-search-line search-icon"></i>
+        <input type="text" id="catalogSearch" placeholder="Buscar insumos, materia prima, envases..." aria-label="Buscar productos">
+        <button id="clearSearch" class="clear-search-btn" style="display: none;"><i class="ri-close-line"></i></button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="nav-action-btn branch-btn" id="openBranchNav" title="Nuestras Sucursales">
+          <i class="ri-map-pin-2-line"></i>
+          <span class="btn-lbl">Agencias</span>
+        </button>
+        <button class="nav-action-btn cart-toggle-btn" id="openCartBtn" title="Ver Carrito de Compras">
+          <div class="cart-icon-wrapper">
+            <i class="ri-shopping-cart-2-line"></i>
+            <span class="cart-badge" id="cartCountBadge">0</span>
+          </div>
+          <span class="btn-lbl">Mi Carrito</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="content-wrapper">
+
+    <!-- Hero Section with trajectory & trust elements -->
+    <section class="hero-section">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="badge-trust">
+          <i class="ri-medal-fill"></i>
+          <span>Más de 29 años de Trayectoria Nacional</span>
+        </div>
+        <h2 class="hero-title">Confianza y Calidad Médica para tu Hogar y Negocio</h2>
+        <p class="hero-subtitle">
+          Especializados en la fabricación y distribución de <strong>productos químicos, cosmetológicos, insumos médicos y envases</strong> con los más altos estándares de calidad.
+        </p>
+        <div class="hero-alert">
+          <div class="alert-icon">
+            <i class="ri-shield-check-fill"></i>
+          </div>
+          <div class="alert-text">
+            <h4>Registro Sanitario Garantizado</h4>
+            <p>Todos nuestros productos e insumos médicos cuentan con la certificación sanitaria correspondiente para tu total seguridad y cumplimiento legal.</p>
+          </div>
+        </div>
+        <div class="hero-cta-group">
+          <a href="#catalogo" class="btn btn-primary">
+            Explorar Catálogo <i class="ri-arrow-right-line"></i>
+          </a>
+          <a href="#agencias" class="btn btn-secondary">
+            Ubicar Sucursales <i class="ri-map-pin-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual-card">
+        <div class="glass-card">
+          <div class="card-glow"></div>
+          <div class="glass-card-header">
+            <span class="status-dot"></span>
+            <span>Atención Inmediata WhatsApp</span>
+          </div>
+          <h3>¿Necesitas Asesoría?</h3>
+          <p>Nuestros asesores están listos para guiar tu pedido de insumos al por mayor y menor.</p>
+          <div class="contact-shortcut">
+            <a href="https://wa.me/593999422969" target="_blank" class="shortcut-btn">
+              <i class="ri-whatsapp-fill"></i> Matriz Guayaquil
+            </a>
+            <a href="https://wa.me/593983770907" target="_blank" class="shortcut-btn">
+              <i class="ri-whatsapp-fill"></i> Portoviejo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Filtering Section -->
+    <section class="categories-section">
+      <div class="section-title-wrapper">
+        <span class="section-pre">Categorías de Especialidad</span>
+        <h3 class="section-title">¿Qué estás buscando hoy?</h3>
+      </div>
+
+      <div class="categories-grid" id="categoriesGrid">
+        <button class="category-card active" data-category="all">
+          <div class="cat-icon-container">
+            <i class="ri-apps-2-line"></i>
+          </div>
+          <h4>Todos</h4>
+          <span class="cat-count" id="count-all">0</span>
+        </button>
+
+        <button class="category-card" data-category="insumos-medicos">
+          <div class="cat-icon-container">
+            <i class="ri-first-aid-kit-line"></i>
+          </div>
+          <h4>Insumos Médicos</h4>
+          <span class="cat-count" id="count-insumos-medicos">0</span>
+        </button>
+
+        <button class="category-card" data-category="materia-prima">
+          <div class="cat-icon-container">
+            <i class="ri-flask-line"></i>
+          </div>
+          <h4>Materia Prima</h4>
+          <span class="cat-count" id="count-materia-prima">0</span>
+        </button>
+
+        <button class="category-card" data-category="hogar-limpieza">
+          <div class="cat-icon-container">
+            <i class="ri-home-gear-line"></i>
+          </div>
+          <h4>Hogar / Limpieza</h4>
+          <span class="cat-count" id="count-hogar-limpieza">0</span>
+        </button>
+
+        <button class="category-card" data-category="cuidado-personal">
+          <div class="cat-icon-container">
+            <i class="ri-hand-sanitizer-line"></i>
+          </div>
+          <h4>Cuidado Personal</h4>
+          <span class="cat-count" id="count-cuidado-personal">0</span>
+        </button>
+
+        <button class="category-card" data-category="envases">
+          <div class="cat-icon-container">
+            <i class="ri-box-3-line"></i>
+          </div>
+          <h4>Envases</h4>
+          <span class="cat-count" id="count-envases">0</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog-section" id="catalogo">
+      <div class="catalog-header-bar">
+        <div class="catalog-info">
+          <span class="catalog-results-text" id="resultsCount">Mostrando todos los productos</span>
+        </div>
+        <div class="catalog-sort">
+          <label for="priceSort">Ordenar por:</label>
+          <select id="priceSort" aria-label="Ordenar productos">
+            <option value="default">Relevancia</option>
+            <option value="low-high">Precio: Menor a Mayor</option>
+            <option value="high-low">Precio: Mayor a Menor</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- No products found state -->
+      <div class="empty-catalog-state" id="emptyCatalogState" style="display: none;">
+        <i class="ri-search-eye-line"></i>
+        <h4>No encontramos productos que coincidan</h4>
+        <p>Prueba buscando otra palabra clave o limpiando los filtros actuales.</p>
+        <button class="btn btn-primary btn-sm" id="resetFiltersBtn">Ver Todos los Productos</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGridContainer">
+        <!-- JS will populate products here -->
+      </div>
+    </section>
+
+    <!-- Agencies & Interactive Map Section -->
+    <section class="agencies-section" id="agencies">
+      <div class="section-title-wrapper text-center">
+        <span class="section-pre">Atención Cercana y Profesional</span>
+        <h3 class="section-title">Nuestras Agencias y Sucursales</h3>
+        <p class="section-desc">Contamos con locales equipados y asesores especializados en las principales zonas comerciales del país.</p>
+      </div>
+
+      <div class="agencies-interactive-container">
+        <!-- Interactive Branch Cards -->
+        <div class="agencies-tabs-list">
+          <div class="agency-tab-card active" data-branch="guayaquil">
+            <div class="tab-header">
+              <i class="ri-map-pin-user-fill"></i>
+              <div>
+                <h4>Agencia Matriz (Guayaquil)</h4>
+                <p>Urdaneta y Quito</p>
+              </div>
+            </div>
+            <div class="tab-details">
+              <p><i class="ri-map-pin-line"></i> Luis Urdaneta 1111 entre Av. Quito y Av. Machala</p>
+              <p><i class="ri-phone-line"></i> 042-296410</p>
+              <p><i class="ri-whatsapp-line"></i> +593 999 422 969</p>
+            </div>
+          </div>
+
+          <div class="agency-tab-card" data-branch="primero-de-mayo">
+            <div class="tab-header">
+              <i class="ri-map-pin-user-fill"></i>
+              <div>
+                <h4>Agencia Primero de Mayo</h4>
+                <p>Guayaquil Sur-Centro</p>
+              </div>
+            </div>
+            <div class="tab-details">
+              <p><i class="ri-map-pin-line"></i> Primero de Mayo 212 entre Av. Quito y Av. Machala</p>
+              <p><i class="ri-phone-line"></i> 042-294355</p>
+              <p><i class="ri-whatsapp-line"></i> +593 939 063 140</p>
+            </div>
+          </div>
+
+          <div class="agency-tab-card" data-branch="portoviejo">
+            <div class="tab-header">
+              <i class="ri-map-pin-user-fill"></i>
+              <div>
+                <h4>Agencia Portoviejo</h4>
+                <p>Provincia de Manabí</p>
+              </div>
+            </div>
+            <div class="tab-details">
+              <p><i class="ri-map-pin-line"></i> Calle Quito, entre Av. Manabí y Av. Chile</p>
+              <p><i class="ri-mail-line"></i> asesor@lacasadelesparadrapo-ec.com</p>
+              <p><i class="ri-whatsapp-line"></i> +593 983 770 907</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map and dynamic visual panel -->
+        <div class="agency-map-viewer">
+          <div class="map-inner-container">
+            <div class="map-mock-glow"></div>
+            <div class="map-hud">
+              <div class="hud-item">
+                <span class="hud-label">Estado de la Sucursal</span>
+                <span class="hud-value success"><i class="ri-checkbox-circle-fill"></i> Abierto hoy</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-label">Horario Comercial</span>
+                <span class="hud-value">08:30 AM - 17:30 PM</span>
+              </div>
+            </div>
+            <div class="map-placeholder">
+              <i class="ri-map-2-line map-main-icon"></i>
+              <div class="map-details-overlay" id="mapDetailsOverlay">
+                <h4 id="overlayBranchTitle">Agencia Matriz (Guayaquil)</h4>
+                <p id="overlayBranchAddress">Luis Urdaneta 1111 entre Av. Quito y Av. Machala</p>
+                <div class="overlay-buttons">
+                  <a href="tel:042296410" id="overlayCallBtn" class="btn btn-outline btn-sm"><i class="ri-phone-fill"></i> Llamar</a>
+                  <a href="https://wa.me/593999422969" id="overlayWaBtn" target="_blank" class="btn btn-primary btn-sm"><i class="ri-whatsapp-fill"></i> Enviar Mensaje</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart Sidebar (Drawer Slide out) -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar-header">
+      <div class="cart-header-title">
+        <i class="ri-shopping-bag-line"></i>
+        <h3>Tu Carrito</h3>
+        <span class="cart-items-count-badge" id="cartItemsCount">0</span>
+      </div>
+      <button class="close-cart-btn" id="closeCartBtn" aria-label="Cerrar Carrito"><i class="ri-close-line"></i></button>
+    </div>
+
+    <!-- Custom Item Form (Freedom to add items not in catalog) -->
+    <div class="custom-product-form-container">
+      <h4 class="custom-form-title"><i class="ri-edit-box-line"></i> ¿Falta algún producto? Agrégalo aquí:</h4>
+      <form id="customProductForm" class="custom-product-form">
+        <input type="text" id="customItemName" placeholder="Nombre de insumo, materia prima..." required aria-label="Nombre del producto personalizado">
+        <div class="custom-form-row">
+          <input type="number" id="customItemQty" min="1" value="1" required aria-label="Cantidad" title="Cantidad">
+          <button type="submit" class="btn btn-primary btn-sm custom-add-btn">
+            <i class="ri-add-line"></i> Agregar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Empty state -->
+    <div class="cart-empty-state" id="cartEmptyState">
+      <i class="ri-shopping-cart-2-fill"></i>
+      <h4>¡Tu carrito está vacío!</h4>
+      <p>Explora nuestras categorías y agrega productos de insumos y materia prima.</p>
+      <button class="btn btn-primary" id="startShoppingBtn">Comenzar a Comprar</button>
+    </div>
+
+    <!-- Cart items lists -->
+    <div class="cart-items-container" id="cartItemsContainer" style="display: none;">
+      <!-- JS dynamic loading -->
+    </div>
+
+    <!-- Cart Footer & Checkout Form -->
+    <div class="cart-sidebar-footer" id="cartSidebarFooter" style="display: none;">
+      <div class="cart-totals">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="totals-row">
+          <span>I.V.A. (15%)</span>
+          <span id="cartTax">$0.00</span>
+        </div>
+        <div class="totals-row total-highlight">
+          <span>Total de Compra</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+      </div>
+      <!-- Checkout fields -->
+      <div class="checkout-form">
+        <button class="btn btn-success btn-block checkout-submit-btn" id="checkoutBtn">
+          <i class="ri-secure-payment-line"></i> Finalizar Compra
+        </button>
+        <span class="checkout-hint">Será redirigido para ingresar su método de pago y dirección de despacho (con recargo de envío).</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Interactive Floating Chatbot widget -->
+  <div class="chatbot-widget" id="chatbotWidget">
+    <button class="chatbot-toggle" id="chatbotToggle" title="Chatear con un asesor virtual">
+      <div class="bot-icon">
+        <i class="ri-customer-service-2-fill"></i>
+      </div>
+      <div class="bot-notification-pulse"></div>
+      <span class="bot-tooltip">¿Dudas? Chatea con nosotros</span>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chat-header">
+        <div class="chat-bot-profile">
+          <div class="bot-avatar">
+            <i class="ri-robot-fill"></i>
+          </div>
+          <div>
+            <h4>Asistente Virtual</h4>
+            <p><span class="online-indicator"></span> En línea para ayudarte</p>
+          </div>
+        </div>
+        <button class="chat-close" id="chatbotClose"><i class="ri-close-line"></i></button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot-msg">
+          <p>¡Hola! 👋 Bienvenido a **La Casa del Esparadrapo**. Con más de 29 años de experiencia, estamos listos para atenderte. ¿Cómo te puedo ayudar hoy?</p>
+        </div>
+      </div>
+
+      <!-- Quick choices -->
+      <div class="chat-quick-replies" id="chatQuickReplies">
+        <button class="quick-reply-btn" data-reply="sucursales">📍 ¿Cuáles son sus sucursales?</button>
+        <button class="quick-reply-btn" data-reply="pedido">🛒 ¿Cómo realizo mi pedido?</button>
+        <button class="quick-reply-btn" data-reply="registro">🛡️ ¿Tienen registro sanitario?</button>
+        <button class="quick-reply-btn" data-reply="contacto">📞 Hablar con un asesor real</button>
+      </div>
+
+      <form class="chat-input-area" id="chatInputArea">
+        <input type="text" id="chatUserInput" placeholder="Escribe tu mensaje..." aria-label="Escribe tu mensaje para el asistente">
+        <button type="submit" class="chat-send-btn" aria-label="Enviar"><i class="ri-send-plane-2-fill"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo-area light">
+          <div class="logo-icon">
+            <i class="ri-heart-pulse-fill"></i>
+          </div>
+          <div class="logo-text">
+            <h3>La Casa del <span>Esparadrapo</span></h3>
+            <p>Trayectoria & Confianza Médica</p>
+          </div>
+        </a>
+        <p class="brand-desc">Líderes en fabricación, comercialización y distribución de insumos médicos de primera y materia prima química en el Ecuador desde hace más de 29 años.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          <a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="#catalogo">Catálogo Completo</a></li>
+          <li><a href="#agencias">Sucursales / Agencias</a></li>
+          <li><a href="#" id="footerCartLink">Ver Carrito</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-categories">
+        <h4>Especialidades</h4>
+        <ul>
+          <li><a href="#catalogo" class="footer-cat-link" data-cat="insumos-medicos">Insumos Médicos</a></li>
+          <li><a href="#catalogo" class="footer-cat-link" data-cat="materia-prima">Materia Prima</a></li>
+          <li><a href="#catalogo" class="footer-cat-link" data-cat="hogar-limpieza">Hogar & Limpieza</a></li>
+          <li><a href="#catalogo" class="footer-cat-link" data-cat="cuidado-personal">Cuidado Personal</a></li>
+          <li><a href="#catalogo" class="footer-cat-link" data-cat="envases">Envases y Empaques</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 La Casa del Esparadrapo. Todos los derechos reservados. Rediseño Web Premium presentado por <strong>Arkan Weaver</strong>.</p>
+    </div>
+  </footer>
+
+  <!-- Add-to-Cart Toast Notification -->
+  <div class="cart-toast" id="cartToast">
+    <div class="cart-toast-inner">
+      <div class="cart-toast-icon">
+        <i class="ri-checkbox-circle-fill"></i>
+      </div>
+      <div class="cart-toast-text">
+        <strong id="toastProductName">Producto</strong>
+        <span>se agregó al carrito correctamente.</span>
+      </div>
+      <div class="cart-toast-actions">
+        <button class="btn btn-outline btn-sm" id="toastContinueBtn">
+          <i class="ri-arrow-left-line"></i> Seguir Comprando
+        </button>
+        <button class="btn btn-success btn-sm" id="toastCheckoutBtn">
+          <i class="ri-shopping-cart-2-line"></i> Finalizar Compra
+        </button>
+      </div>
+      <button class="cart-toast-close" id="toastCloseBtn"><i class="ri-close-line"></i></button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./app.js"></script>
+</body>
+</html>

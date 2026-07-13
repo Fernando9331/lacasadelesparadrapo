@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Finalizar compra y cotización - La Casa del Esparadrapo. Ingresa tus datos fiscales, descarga tu proforma PDF y coordina la entrega.">
+  <title>Finalizar Pedido | La Casa del Esparadrapo</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- html2pdf.js library via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="checkout-page-body">
+
+  <!-- Premium Header (Simplified without search to focus checkout) -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <a href="index.html" class="logo-area">
+        <div class="logo-icon">
+          <i class="ri-heart-pulse-fill"></i>
+        </div>
+        <div class="logo-text">
+          <h1>La Casa del <span>Esparadrapo</span></h1>
+          <p>Laboratorio & Distribuidora</p>
+        </div>
+      </a>
+
+      <!-- Checkout Stepper Tracker -->
+      <div class="checkout-stepper">
+        <div class="step completed">
+          <span class="step-num"><i class="ri-check-line"></i></span>
+          <span class="step-lbl">Carrito</span>
+        </div>
+        <div class="step-line active"></div>
+        <div class="step active">
+          <span class="step-num">2</span>
+          <span class="step-lbl">Checkout & Proforma</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span class="step-lbl">Despacho</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">
+          <i class="ri-arrow-left-line"></i> Volver al Catálogo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Checkout Container -->
+  <main class="content-wrapper">
+    <section class="checkout-layout">
+      
+      <!-- Left Column: Checkout Billing Form -->
+      <div class="checkout-form-column">
+        <div class="checkout-card">
+          <div class="checkout-card-header">
+            <i class="ri-file-user-line header-icon"></i>
+            <h2>Datos de Facturación & Contacto</h2>
+          </div>
+          
+          <form id="billingDetailsForm" class="checkout-form-grid">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="billCustomerName">Nombre Completo o Razón Social *</label>
+                <input type="text" id="billCustomerName" placeholder="Ej. Juan Pérez o Laboratorios S.A." required>
+              </div>
+              <div class="form-group">
+                <label for="billEmail">Correo Electrónico *</label>
+                <input type="email" id="billEmail" placeholder="Ej. juan@correo.com" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="billDocType">Tipo de Documento *</label>
+                <select id="billDocType">
+                  <option value="cedula">Cédula de Identidad (10 dígitos)</option>
+                  <option value="ruc">R.U.C. (13 dígitos)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="billDocNum">Número de Identificación *</label>
+                <input type="text" id="billDocNum" placeholder="Ej. 0928374650" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="billPhone">Teléfono Celular / WhatsApp *</label>
+                <input type="tel" id="billPhone" placeholder="Ej. 0999422969" required>
+              </div>
+              <div class="form-group">
+                <label for="billAgencySelect">Coordinar Pedido con Sucursal *</label>
+                <select id="billAgencySelect" required>
+                  <!-- JS Dynamic load -->
+                </select>
+              </div>
+            </div>
+
+            <!-- Delivery Logistics section -->
+            <div class="logistics-section">
+              <h3><i class="ri-truck-line"></i> Método de Despacho</h3>
+              
+              <div class="delivery-options-grid">
+                <label class="delivery-radio-card active">
+                  <input type="radio" name="deliveryType" value="pickup" checked>
+                  <div class="radio-content">
+                    <i class="ri-building-line"></i>
+                    <div>
+                      <strong>Retirar en Agencia</strong>
+                      <p>Retiro directo en la sucursal seleccionada (Gratuito).</p>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="delivery-radio-card">
+                  <input type="radio" name="deliveryType" value="shipping">
+                  <div class="radio-content">
+                    <i class="ri-map-pin-user-line"></i>
+                    <div>
+                      <strong>Envío Servientrega</strong>
+                      <p>Envío a nivel nacional con recargo ($5.00).</p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Shipping addresses details (Hidden by default unless selected) -->
+              <div class="shipping-details-panel" id="shippingDetailsPanel" style="display: none;">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="shipProvince">Provincia *</label>
+                    <select id="shipProvince">
+                      <option value="Guayas">Guayas</option>
+                      <option value="Manabi">Manabí</option>
+                      <option value="Pichincha">Pichincha</option>
+                      <option value="Azuay">Azuay</option>
+                      <option value="Loja">Loja</option>
+                      <option value="Tungurahua">Tungurahua</option>
+                      <option value="El Oro">El Oro</option>
+                      <option value="Los Rios">Los Ríos</option>
+                      <option value="Santo Domingo">Santo Domingo</option>
+                      <option value="Esmeraldas">Esmeraldas</option>
+                      <option value="Santa Elena">Santa Elena</option>
+                      <option value="Cotopaxi">Cotopaxi</option>
+                      <option value="Carchi">Carchi</option>
+                      <option value="Cañar">Cañar</option>
+                      <option value="Bolivar">Bolívar</option>
+                      <option value="Chimborazo">Chimborazo</option>
+                      <option value="Imbabura">Imbabura</option>
+                      <option value="Pastaza">Pastaza</option>
+                      <option value="Napo">Napo</option>
+                      <option value="Orellana">Orellana</option>
+                      <option value="Sucumbios">Sucumbíos</option>
+                      <option value="Morona Santiago">Morona Santiago</option>
+                      <option value="Zamora Chinchipe">Zamora Chinchipe</option>
+                      <option value="Galapagos">Galápagos</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="shipCity">Ciudad *</label>
+                    <input type="text" id="shipCity" placeholder="Ej. Guayaquil, Quito, Manta">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="shipAddress">Dirección Completa de Envío *</label>
+                  <textarea id="shipAddress" rows="3" placeholder="Ej. Av. de los Granados N34-12 y Eloy Alfaro, Edificio A, Dpto 4B"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Methods tabs -->
+            <div class="payment-section">
+              <h3><i class="ri-bank-card-line"></i> Método de Pago</h3>
+              
+              <div class="payment-tabs-nav">
+                <button type="button" class="pay-tab-btn active" data-method="transfer">
+                  <i class="ri-bank-line"></i> Transferencia Bancaria
+                </button>
+                <button type="button" class="pay-tab-btn" data-method="delivery">
+                  <i class="ri-hand-coin-line"></i> Pago Contra Entrega
+                </button>
+              </div>
+
+              <!-- Bank Transfer Details Panel -->
+              <div class="payment-tab-content active" id="payPanelTransfer">
+                <div class="bank-details-card">
+                  <div class="bank-logo-row">
+                    <i class="ri-bank-fill"></i>
+                    <strong>Banco Pichincha (Datos Oficiales de Depósito)</strong>
+                  </div>
+                  <ul class="bank-info-list">
+                    <li><span>Beneficiario:</span> <strong>La Casa del Esparadrapo S.A.</strong></li>
+                    <li><span>RUC/Identificación:</span> <strong>0991234567001</strong></li>
+                    <li><span>Tipo de Cuenta:</span> <strong>Cuenta Corriente</strong></li>
+                    <li><span>Número de Cuenta:</span> <strong>2200543210</strong></li>
+                    <li><span>Correo de Notificación:</span> <strong>pagos@lacasadelesparadrapo-ec.com</strong></li>
+                  </ul>
+                  <p class="bank-hint-text"><i class="ri-information-line"></i> Realiza la transferencia electrónica e incluye el capture del comprobante cuando procedas a enviar tu orden a WhatsApp.</p>
+                </div>
+              </div>
+
+              <!-- Cash On Delivery Details Panel -->
+              <div class="payment-tab-content" id="payPanelDelivery" style="display: none;">
+                <div class="cod-details-card">
+                  <div class="cod-header">
+                    <i class="ri-wallet-3-line"></i>
+                    <strong>Pago al Recibir / Retirar</strong>
+                  </div>
+                  <p>Cancela de forma física en efectivo, tarjeta de débito o crédito directamente al retirar tu orden de la sucursal elegida, o al transportista en entregas locales coordinadas.</p>
+                  <p class="cod-warn-text"><i class="ri-error-warning-line"></i> Nota: Esta opción aplica únicamente bajo confirmación telefónica previa del asesor asignado.</p>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Right Column: Cart summary breakdown & Final triggers -->
+      <div class="checkout-summary-column">
+        <div class="checkout-card sticky-card">
+          <div class="checkout-card-header">
+            <i class="ri-shopping-cart-line header-icon"></i>
+            <h2>Resumen del Pedido</h2>
+          </div>
+
+          <!-- Checkout cart items listing -->
+          <div class="checkout-items-list" id="checkoutItemsList">
+            <!-- Dynamic loads -->
+          </div>
+
+          <!-- Final calculations break -->
+          <div class="checkout-totals-breakdown">
+            <div class="break-row">
+              <span>Subtotal</span>
+              <span id="summarySubtotal">$0.00</span>
+            </div>
+            <div class="break-row">
+              <span>Recargo Envío</span>
+              <span id="summaryShipping">$0.00</span>
+            </div>
+            <div class="break-row">
+              <span>I.V.A. (15%)</span>
+              <span id="summaryTax">$0.00</span>
+            </div>
+            <div class="break-row total-row-final">
+              <span>Total a Coordinar</span>
+              <span id="summaryTotal">$0.00</span>
+            </div>
+          </div>
+
+          <!-- Checkout Final Action buttons -->
+          <div class="checkout-actions-block">
+            <button type="button" class="btn btn-outline checkout-proforma-btn" id="downloadProformaBtn">
+              <i class="ri-file-pdf-line"></i> Descargar Proforma PDF
+            </button>
+            
+            <button type="button" class="btn btn-success btn-block checkout-submit-btn-final" id="submitOrderBtn">
+              <i class="ri-whatsapp-fill"></i> Confirmar y Enviar a WhatsApp
+            </button>
+            <p class="checkout-legal-disclaimer">Al confirmar, abriremos un chat de WhatsApp con el asesor correspondiente adjuntando los datos fiscales ingresados.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+     HIDDEN PRINT TEMPLATE FOR PDF PROFORMA (A4 Corporate Layout)
+     ========================================================================== -->
+  <div style="display: none;">
+    <div id="proformaPrintTemplate" class="proforma-document">
+      
+      <!-- Proforma Header -->
+      <div class="proforma-header-area">
+        <div class="proforma-company-info">
+          <div class="proforma-logo">
+            <i class="ri-heart-pulse-fill"></i>
+            <div>
+              <h2>LA CASA DEL ESPARADRAPO S.A.</h2>
+              <p>Laboratorio & Distribución Médica y Química</p>
+            </div>
+          </div>
+          <p class="proforma-company-ruc">RUC: 0991234567001</p>
+          <p class="proforma-company-address">Luis Urdaneta 1111 entre Av. Quito y Av. Machala | Guayaquil, Ecuador</p>
+          <p class="proforma-company-contact">Telf: 042-296410 | Email: proformas@lacasadelesparadrapo-ec.com</p>
+        </div>
+
+        <div class="proforma-title-block">
+          <h3>COTIZACIÓN / PROFORMA</h3>
+          <p class="proforma-number">N° LCE-${Date.now().toString().slice(-6)}</p>
+          <p class="proforma-date">Fecha Emisión: ${new Date().toLocaleDateString()}</p>
+          <p class="proforma-validity">Validez de Oferta: 15 días calendario</p>
+        </div>
+      </div>
+
+      <hr class="proforma-divider">
+
+      <!-- Client Details row -->
+      <div class="proforma-client-area">
+        <h4>DATOS DEL CLIENTE / REQUERIMIENTO</h4>
+        <table class="proforma-client-table">
+          <tr>
+            <td><strong>Señor(es):</strong></td>
+            <td id="pdfClientName">-</td>
+            <td><strong>Identificación:</strong></td>
+            <td id="pdfClientDoc">-</td>
+          </tr>
+          <tr>
+            <td><strong>Teléfono:</strong></td>
+            <td id="pdfClientPhone">-</td>
+            <td><strong>Correo:</strong></td>
+            <td id="pdfClientEmail">-</td>
+          </tr>
+          <tr>
+            <td><strong>Despacho:</strong></td>
+            <td id="pdfClientDelivery">-</td>
+            <td><strong>Método Pago:</strong></td>
+            <td id="pdfClientPayment">-</td>
+          </tr>
+          <tr id="pdfClientAddressRow" style="display: none;">
+            <td><strong>Dirección:</strong></td>
+            <td colspan="3" id="pdfClientAddress">-</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Itemized Table -->
+      <div class="proforma-table-area">
+        <table class="proforma-items-table">
+          <thead>
+            <tr>
+              <th style="width: 8%">Item</th>
+              <th>Descripción del Producto</th>
+              <th style="width: 15%; text-align: center;">Categoría</th>
+              <th style="width: 10%; text-align: center;">Cantidad</th>
+              <th style="width: 15%; text-align: right;">Precio Unit.</th>
+              <th style="width: 15%; text-align: right;">Total Item</th>
+            </tr>
+          </thead>
+          <tbody id="pdfItemsTableBody">
+            <!-- Renders dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Financial Totals area -->
+      <div class="proforma-footer-area">
+        <div class="proforma-conditions">
+          <h5>Condiciones Comerciales y de Pago:</h5>
+          <ul>
+            <li>En caso de <strong>Transferencia Bancaria</strong>, realizar el depósito en la cta. corriente N° 2200543210 del Banco Pichincha a nombre de La Casa del Esparadrapo S.A.</li>
+            <li>Envíe su proforma sellada o capture de depósito a su asesor asignado vía WhatsApp para autorizar el despacho.</li>
+            <li>Los productos marcados como **"A COTIZAR"** serán tasados manualmente por el asesor de ventas.</li>
+          </ul>
+        </div>
+
+        <div class="proforma-financials">
+          <table class="proforma-totals-table">
+            <tr>
+              <td>Subtotal:</td>
+              <td id="pdfSubtotal">$0.00</td>
+            </tr>
+            <tr>
+              <td>Recargo Envío:</td>
+              <td id="pdfShipping">$0.00</td>
+            </tr>
+            <tr>
+              <td>I.V.A. (15%):</td>
+              <td id="pdfTax">$0.00</td>
+            </tr>
+            <tr class="pdf-total-row">
+              <td>Total Cotizado:</td>
+              <td id="pdfTotal">$0.00</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Autographs signatures area -->
+      <div class="proforma-signatures-area">
+        <div class="sig-col">
+          <div class="sig-line"></div>
+          <p>Preparado por: Dpto. de Ventas</p>
+          <p>La Casa del Esparadrapo S.A.</p>
+        </div>
+        <div class="sig-col">
+          <div class="sig-line"></div>
+          <p>Aceptado por: Cliente</p>
+          <p>Firma autorizada / Sello</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-area light">
+          <div class="logo-icon">
+            <i class="ri-heart-pulse-fill"></i>
+          </div>
+          <div class="logo-text">
+            <h3>La Casa del <span>Esparadrapo</span></h3>
+            <p>Trayectoria & Confianza Médica</p>
+          </div>
+        </a>
+        <p class="brand-desc">Líderes en fabricación, comercialización y distribución de insumos médicos de primera y materia prima química en el Ecuador desde hace más de 29 años.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 La Casa del Esparadrapo. Todos los derechos reservados. Rediseño Web Premium presentado por <strong>Arkan Weaver</strong>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./checkout.js"></script>
+</body>
+</html>
