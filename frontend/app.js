@@ -3,7 +3,7 @@
    ========================================================================== */
 
 // API Base URL
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api';
 
 // Dynamic Database State
 let products = [];
@@ -313,6 +313,12 @@ function removeCartItem(productId) {
   updateCartUI();
 }
 
+function clearEntireCart() {
+  if (!confirm('¿Estás seguro de que deseas vaciar todo el carrito?')) return;
+  cart = [];
+  updateCartUI();
+}
+
 function updateCartUI() {
   saveCartToStorage();
   // Update badges
@@ -329,8 +335,8 @@ function updateCartUI() {
     DOM.cartItemsContainer.style.display = 'flex';
     DOM.cartSidebarFooter.style.display = 'block';
 
-    // Render items list
-    DOM.cartItemsContainer.innerHTML = cart.map(item => {
+    // Render items list with clear cart button
+    DOM.cartItemsContainer.innerHTML = `<div class="clear-cart-row"><button class="btn btn-outline btn-sm clear-cart-btn" onclick="clearEntireCart()"><i class="ri-delete-bin-line"></i> Vaciar Carrito</button></div>` + cart.map(item => {
       const isCustom = item.product.category === 'custom';
       const priceDisplay = isCustom ? 'A cotizar' : `$${item.product.price.toFixed(2)} c/u`;
       return `
@@ -371,6 +377,7 @@ function updateCartUI() {
 // Global reference for onclick functions
 window.updateCartQty = updateCartQty;
 window.removeCartItem = removeCartItem;
+window.clearEntireCart = clearEntireCart;
 
 // 9. DRAWER SLIDE TOGGLE
 function openCartDrawer() {

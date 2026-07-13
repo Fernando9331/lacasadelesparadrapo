@@ -1252,6 +1252,25 @@ a {
   text-decoration: underline;
 }
 
+.clear-cart-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.clear-cart-btn {
+  color: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  font-size: 0.78rem;
+}
+
+.clear-cart-btn:hover {
+  background: var(--danger-color) !important;
+  color: #fff !important;
+}
+
 /* Cart Footer & Checkout */
 .cart-sidebar-footer {
   padding: 1.5rem;

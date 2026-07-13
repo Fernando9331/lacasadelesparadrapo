@@ -2,7 +2,7 @@
    PRODUCT DETAIL PAGE CONTROLLER: LA CASA DEL ESPARADRAPO
    ========================================================================== */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api';
 
 // Dynamic Database State
 let products = [];
@@ -404,6 +404,12 @@ function removeCartItem(productId) {
   updateCartUI();
 }
 
+function clearEntireCart() {
+  if (!confirm('¿Estás seguro de que deseas vaciar todo el carrito?')) return;
+  cart = [];
+  updateCartUI();
+}
+
 function updateCartUI() {
   saveCartToStorage();
 
@@ -420,7 +426,7 @@ function updateCartUI() {
     DOM.cartItemsContainer.style.display = 'flex';
     DOM.cartSidebarFooter.style.display = 'block';
 
-    DOM.cartItemsContainer.innerHTML = cart.map(item => {
+    DOM.cartItemsContainer.innerHTML = `<div class="clear-cart-row"><button class="btn btn-outline btn-sm clear-cart-btn" onclick="clearEntireCart()"><i class="ri-delete-bin-line"></i> Vaciar Carrito</button></div>` + cart.map(item => {
       const isCustom = item.product.category === 'custom';
       const priceDisplay = isCustom ? 'A cotizar' : `$${item.product.price.toFixed(2)} c/u`;
       return `
@@ -460,6 +466,7 @@ function updateCartUI() {
 // Global binding for DOM actions
 window.updateCartQty = updateCartQty;
 window.removeCartItem = removeCartItem;
+window.clearEntireCart = clearEntireCart;
 
 // 7. CUSTOM CART ADDITIONS
 function addCustomProductToCart(name, qty) {
@@ -547,7 +554,10 @@ function initEventListeners() {
   const toastCloseBtn = document.getElementById('toastCloseBtn');
 
   if (toastContinueBtn) {
-    toastContinueBtn.addEventListener('click', hideCartToast);
+    toastContinueBtn.addEventListener('click', () => {
+      hideCartToast();
+      window.location.href = 'index.html#catalogo';
+    });
   }
   if (toastCheckoutBtn) {
     toastCheckoutBtn.addEventListener('click', () => {
