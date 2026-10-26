@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>En vivo</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <span class="live-badge" id="live-badge" hidden>EN VIVO</span>
+    <h1 id="stream-title">Transmisión en vivo</h1>
+  </header>
+
+  <div class="ad-slot ad-top" data-position="top"></div>
+
+  <main class="layout">
+    <aside class="ad-slot ad-side" data-position="left"></aside>
+
+    <section class="player-wrap">
+      <video id="player" controls playsinline muted></video>
+      <p class="player-message" id="player-message">Cargando…</p>
+    </section>
+
+    <aside class="ad-slot ad-side" data-position="right"></aside>
+  </main>
+
+  <div class="ad-slot ad-bottom" data-position="bottom"></div>
+
+  <footer class="site-footer">
+    <p>Las piezas publicitarias muestran la organización que las financia.</p>
+  </footer>
+
+  <script src="/vendor/hls.min.js"></script>
+  <script src="/live.js"></script>
+</body>
+</html>

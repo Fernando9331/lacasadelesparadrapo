@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de transmisión</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin">
+  <header class="site-header">
+    <h1>Panel de transmisión</h1>
+  </header>
+
+  <main class="admin-main">
+    <section class="card">
+      <h2>Acceso</h2>
+      <form id="login-form" autocomplete="off">
+        <label>Token de administración
+          <input type="password" id="admin-token" required minlength="32">
+        </label>
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="status" id="login-status" role="status"></p>
+    </section>
+
+    <div id="admin-panel" hidden>
+      <section class="card">
+        <h2>Transmisión</h2>
+        <form id="title-form">
+          <label>Título visible
+            <input type="text" id="stream-title-input" maxlength="140">
+          </label>
+          <button type="submit">Guardar título</button>
+        </form>
+        <button type="button" id="stream-button">Obtener datos de ingesta para OBS</button>
+        <dl class="ingest" id="ingest" hidden>
+          <dt>Servidor RTMP</dt>
+          <dd><input type="text" id="rtmp-url" readonly></dd>
+          <dt>Clave de transmisión</dt>
+          <dd>
+            <input type="password" id="stream-key" readonly>
+            <button type="button" id="toggle-key">Mostrar</button>
+          </dd>
+          <dt>Estado</dt>
+          <dd id="stream-status"></dd>
+        </dl>
+        <p class="status" id="stream-msg" role="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>Nuevo banner</h2>
+        <form id="banner-form">
+          <label>Título / texto alternativo
+            <input type="text" name="title" required maxlength="120">
+          </label>
+          <label>Pagado por (obligatorio)
+            <input type="text" name="paidBy" required maxlength="160">
+          </label>
+          <label>URL de la imagen (https)
+            <input type="url" name="imageUrl" required>
+          </label>
+          <label>Enlace al hacer clic (opcional, https)
+            <input type="url" name="linkUrl">
+          </label>
+          <label>Posición
+            <select name="position">
+              <option value="top">Arriba</option>
+              <option value="left">Izquierda</option>
+              <option value="right">Derecha</option>
+              <option value="bottom">Abajo</option>
+            </select>
+          </label>
+          <label>Desde (opcional)
+            <input type="datetime-local" name="startsAt">
+          </label>
+          <label>Hasta (opcional)
+            <input type="datetime-local" name="endsAt">
+          </label>
+          <button type="submit">Crear banner</button>
+        </form>
+        <p class="status" id="banner-msg" role="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>Banners</h2>
+        <ul class="banner-list" id="banner-list"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
